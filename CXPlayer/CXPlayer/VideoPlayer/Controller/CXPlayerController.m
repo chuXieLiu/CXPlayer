@@ -169,6 +169,9 @@ static NSString * kAVPlayerItemPropertyStatus = @"status";
             
             // 从视频中按时间截取图片
             [self gengerateThumbImage];
+            
+            // 加载字幕
+            [self loadMediaOptions];
         }
     }
 }
@@ -258,6 +261,28 @@ static NSString * kAVPlayerItemPropertyStatus = @"status";
         }
     }];
     
+}
+
+- (void)loadMediaOptions
+{
+    // AVAsset中的可呈现资源容器AVMediaSelectionGroup，提供指定SelectionGroup加载类型，只加载字幕，作为AVMediaSelectionOption的容器
+    /*
+     AVMediaCharacteristicLegible 字幕
+     AVMediaCharacteristicAudible 音频
+     AVMediaCharacteristicVisual 视频
+     */
+    AVMediaSelectionGroup *group = [_asset mediaSelectionGroupForMediaCharacteristic:AVMediaCharacteristicLegible];
+    if (group) {
+        // AVMediaSelectionOption 表示AVAsset中的备用媒体呈现方式
+        for (AVMediaSelectionOption *option in group.options) {
+            
+            if ([option.displayName rangeOfString:@"English"].length > 0) {
+                [_playerItem selectMediaOption:option inMediaSelectionGroup:group];
+                return;
+            }
+        }
+        
+    }
 }
 
 

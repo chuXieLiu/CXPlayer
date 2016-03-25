@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CXPlayerConst : UIView
-
-@end
+/**
+ *  可视幻灯片进度条高度
+ */
+UIKIT_EXTERN CGFloat const kCXFilmstripViewHeight;

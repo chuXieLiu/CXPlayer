@@ -100,13 +100,19 @@ static const NSTimeInterval kCXShowBarTimerInterval = 3.0f;
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    if (_filmstripView) {
+    if (_filmstripView) {   // 可视进度条
         _filmstripView.size = CGSizeMake(self.width, kCXFilmstripViewHeight);
         if (![self filmstripViewIsShowing]) {    // 正隐藏
             _filmstripView.origin = CGPointMake(0, -self.height);
         } else {    // 正显示
             _filmstripView.origin = CGPointMake(0, _topBar.height);
         }
+    }
+    
+    if ([self topBarAndToolBarIsShowing]) {
+        [self beginTimer];
+    } else {
+        [self endTimer];
     }
 }
 
@@ -246,11 +252,13 @@ static const NSTimeInterval kCXShowBarTimerInterval = 3.0f;
 - (void)showTopBarAndToolBar
 {
     if ([self topBarAndToolBarIsShowing]) return;
+    _showFilmstripButton.enabled = NO;
     [UIView animateWithDuration:0.35 animations:^{
         _topBar.top = 0;
         _toolBar.top = self.bounds.size.height - _toolBar.height;
     } completion:^(BOOL finished) {
         [self beginTimer];
+        _showFilmstripButton.enabled = YES;
     }];
 }
 
@@ -274,9 +282,11 @@ static const NSTimeInterval kCXShowBarTimerInterval = 3.0f;
         !hidenCompleteBlock ? : hidenCompleteBlock();
         return;
     }
+    _showFilmstripButton.enabled = NO;
     [UIView animateWithDuration:0.35 animations:^{
         _filmstripView.top = _topBar.height;
     } completion:^(BOOL finished) {
+        _showFilmstripButton.enabled = YES;
         [_showFilmstripButton setTitle:@"隐藏" forState:UIControlStateNormal];
         !hidenCompleteBlock ? : hidenCompleteBlock();
     }];
@@ -288,9 +298,11 @@ static const NSTimeInterval kCXShowBarTimerInterval = 3.0f;
         !hidenCompleteBlock ? : hidenCompleteBlock();
         return;
     }
+    _showFilmstripButton.enabled = NO;
     [UIView animateWithDuration:0.35 animations:^{
         _filmstripView.top = - _filmstripView.height;
     } completion:^(BOOL finished) {
+        _showFilmstripButton.enabled = YES;
         [_showFilmstripButton setTitle:@"显示" forState:UIControlStateNormal];
         !hidenCompleteBlock ? : hidenCompleteBlock();
     }];
