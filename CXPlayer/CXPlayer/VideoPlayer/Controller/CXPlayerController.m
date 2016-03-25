@@ -11,6 +11,7 @@
 #import "CXPlayerView.h"
 #import "AVAsset+Extension.h"
 #import "CXTransport.h"
+#import "CXPlayerFilm.h"
 
 static const NSString * kPlayerItemStatusContex;
 
@@ -38,6 +39,8 @@ static NSString * kAVPlayerItemPropertyStatus = @"status";
 @property (nonatomic,weak) id<CXTransport> transport;   // 指向CXOverlayView
 
 @property (nonatomic,assign) float lastPlaybackRate;
+
+@property (nonatomic,strong) AVAssetImageGenerator *imageGenerator;
 
 
 @end
@@ -82,10 +85,9 @@ static NSString * kAVPlayerItemPropertyStatus = @"status";
     [[UIApplication sharedApplication].keyWindow.rootViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)jumpToTime:(NSTimeInterval)time
+- (void)jumpToTime:(CMTime)time
 {
-    CMTime interval = CMTimeMakeWithSeconds(time, NSEC_PER_SEC);
-    [_player seekToTime:interval];
+    [_player seekToTime:time];
 }
 
 - (void)scheduleDidBegin
@@ -164,6 +166,9 @@ static NSString * kAVPlayerItemPropertyStatus = @"status";
             [self.transport beginTransport];
             
             [_player play];
+            
+            // 从视频中按时间截取图片
+            [self gengerateThumbImage];
         }
     }
 }
@@ -201,6 +206,58 @@ static NSString * kAVPlayerItemPropertyStatus = @"status";
          [weakSelf.transport setCurrentTime:playingTime duration:duration];
          
      }];
+}
+
+- (void)gengerateThumbImage
+{
+    // 生成一个AVAssetImageGenerator实例
+    _imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:_asset];
+    
+    // 设置请求图片大小,高度为0，让系统自适应高度
+    _imageGenerator.maximumSize = CGSizeMake(200, 0);
+    
+    CMTime duration = _asset.duration;
+    
+    NSInteger imagesCount = 20;
+    
+    NSMutableArray *times = [NSMutableArray arrayWithCapacity:imagesCount];
+    
+    // 截取20个图片
+    CMTimeValue increment = duration.value / imagesCount;
+    
+    CMTimeValue currentValue = increment;
+    
+    while (currentValue <= duration.value) {
+        CMTime time = CMTimeMake(currentValue, duration.timescale);
+        [times addObject:[NSValue valueWithCMTime:time]];
+        currentValue += increment;
+    }
+    
+    // 生成图片
+    __block NSInteger imageCount = times.count;
+    __block NSMutableArray *images = [NSMutableArray arrayWithCapacity:times.count];
+    [_imageGenerator generateCGImagesAsynchronouslyForTimes:times
+    completionHandler:^(CMTime requestedTime,
+                        CGImageRef  _Nullable image,
+                        CMTime actualTime,
+                        AVAssetImageGeneratorResult result,
+                        NSError * _Nullable error) {
+        if (result == AVAssetImageGeneratorSucceeded) {
+            UIImage *newImage = [UIImage imageWithCGImage:image];
+            if (newImage) {
+                CXPlayerFilm *film = [CXPlayerFilm playerFilmWithThumbImage:newImage actualTime:actualTime];
+                [images addObject:film];
+            }
+        } else {
+            NSLog(@"%@",[error localizedDescription]);
+        }
+        if (--imageCount == 0) {    // 完成
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_transport setFilmstrip:images.copy];
+            });
+        }
+    }];
+    
 }
 
 

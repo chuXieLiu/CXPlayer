@@ -24,10 +24,13 @@
                                 <action selector="close:" destination="iN0-l3-epB" eventType="touchUpInside" id="xZo-cx-ipi"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yGd-0U-Jel">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yGd-0U-Jel">
                             <rect key="frame" x="280" y="15" width="30" height="29"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="显示">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" title="隐藏">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -150,6 +153,7 @@
                 <outlet property="playingSlider" destination="wGi-b4-ASH" id="gJV-PW-5AW"/>
                 <outlet property="scheduleTimeLabel" destination="Fvp-M4-HNw" id="44o-Lg-wPK"/>
                 <outlet property="scheduleTimeView" destination="uiX-wA-Ef8" id="8lg-fj-rRU"/>
+                <outlet property="showFilmstripButton" destination="yGd-0U-Jel" id="frQ-qV-At6"/>
                 <outlet property="titleLabel" destination="Vqg-kT-Xqw" id="Rha-dc-KNS"/>
                 <outlet property="toolBar" destination="wOd-l0-dKl" id="fDv-sj-QeH"/>
                 <outlet property="topBar" destination="cTd-hw-cZj" id="8E5-Hs-zsr"/>

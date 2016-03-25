@@ -29,7 +29,7 @@
  *
  *  @param time
  */
-- (void)jumpToTime:(NSTimeInterval)time;
+- (void)jumpToTime:(CMTime)time;
 
 /**
  *  开始改变进度
@@ -91,6 +91,13 @@
  *  @param duration video总长
  */
 - (void)setCurrentTime:(NSTimeInterval)time duration:(NSTimeInterval)duration;
+
+/**
+ *  设置可视幻灯片进度条
+ *
+ *  @param filmstrips CXFilmstrip模型数组
+ */
+- (void)setFilmstrip:(NSArray *)filmstrips;
 
 
 

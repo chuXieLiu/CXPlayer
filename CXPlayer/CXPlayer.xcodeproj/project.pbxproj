@@ -23,6 +23,9 @@
 		F9CC32201CA2AF36000A0AED /* CXTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CC321F1CA2AF36000A0AED /* CXTransport.m */; };
 		F9CC32231CA424B3000A0AED /* NSTimer+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CC32221CA424B3000A0AED /* NSTimer+Extension.m */; };
 		F9CC32261CA431E9000A0AED /* VideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CC32251CA431E9000A0AED /* VideoViewController.m */; };
+		F9D601F91CA4BBCA00232D97 /* CXPlayerFilm.m in Sources */ = {isa = PBXBuildFile; fileRef = F9D601F81CA4BBCA00232D97 /* CXPlayerFilm.m */; };
+		F9D601FF1CA4C92600232D97 /* CXFilmstripView.m in Sources */ = {isa = PBXBuildFile; fileRef = F9D601FE1CA4C92600232D97 /* CXFilmstripView.m */; };
+		F9D602051CA4DE2900232D97 /* CXPlayerConst.m in Sources */ = {isa = PBXBuildFile; fileRef = F9D602041CA4DE2900232D97 /* CXPlayerConst.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +57,12 @@
 		F9CC32221CA424B3000A0AED /* NSTimer+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Extension.m"; sourceTree = "<group>"; };
 		F9CC32241CA431E9000A0AED /* VideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoViewController.h; sourceTree = "<group>"; };
 		F9CC32251CA431E9000A0AED /* VideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoViewController.m; sourceTree = "<group>"; };
+		F9D601F71CA4BBCA00232D97 /* CXPlayerFilm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXPlayerFilm.h; sourceTree = "<group>"; };
+		F9D601F81CA4BBCA00232D97 /* CXPlayerFilm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXPlayerFilm.m; sourceTree = "<group>"; };
+		F9D601FD1CA4C92600232D97 /* CXFilmstripView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXFilmstripView.h; sourceTree = "<group>"; };
+		F9D601FE1CA4C92600232D97 /* CXFilmstripView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXFilmstripView.m; sourceTree = "<group>"; };
+		F9D602031CA4DE2900232D97 /* CXPlayerConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXPlayerConst.h; sourceTree = "<group>"; };
+		F9D602041CA4DE2900232D97 /* CXPlayerConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXPlayerConst.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +153,10 @@
 			children = (
 				F9CC321E1CA2AF36000A0AED /* CXTransport.h */,
 				F9CC321F1CA2AF36000A0AED /* CXTransport.m */,
+				F9D601F71CA4BBCA00232D97 /* CXPlayerFilm.h */,
+				F9D601F81CA4BBCA00232D97 /* CXPlayerFilm.m */,
+				F9D602031CA4DE2900232D97 /* CXPlayerConst.h */,
+				F9D602041CA4DE2900232D97 /* CXPlayerConst.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -156,6 +169,8 @@
 				F9CC32121CA2979D000A0AED /* CXOverlayView.h */,
 				F9CC32131CA2979D000A0AED /* CXOverlayView.m */,
 				F9CC32151CA297AA000A0AED /* CXOverlayView.xib */,
+				F9D601FD1CA4C92600232D97 /* CXFilmstripView.h */,
+				F9D601FE1CA4C92600232D97 /* CXFilmstripView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -248,12 +263,15 @@
 				F9CC32201CA2AF36000A0AED /* CXTransport.m in Sources */,
 				F9CC31EE1CA26CF3000A0AED /* ViewController.m in Sources */,
 				F9CC32261CA431E9000A0AED /* VideoViewController.m in Sources */,
+				F9D602051CA4DE2900232D97 /* CXPlayerConst.m in Sources */,
 				F9CC31EB1CA26CF3000A0AED /* AppDelegate.m in Sources */,
 				F9CC31E81CA26CF3000A0AED /* main.m in Sources */,
 				F9CC32111CA28FD7000A0AED /* AVAsset+Extension.m in Sources */,
 				F9CC32141CA2979D000A0AED /* CXOverlayView.m in Sources */,
 				F9CC32091CA28056000A0AED /* CXPlayerView.m in Sources */,
 				F9CC32191CA29B5B000A0AED /* UIView+Extension.m in Sources */,
+				F9D601F91CA4BBCA00232D97 /* CXPlayerFilm.m in Sources */,
+				F9D601FF1CA4C92600232D97 /* CXFilmstripView.m in Sources */,
 				F9CC32231CA424B3000A0AED /* NSTimer+Extension.m in Sources */,
 				F9CC32061CA2789C000A0AED /* CXPlayerController.m in Sources */,
 			);
@@ -404,6 +422,7 @@
 				F9CC31FC1CA26CF3000A0AED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -57,9 +57,5 @@
     return _overlayView;
 }
 
-- (void)dealloc
-{
-    NSLog(@"xxxxxxx");
-}
 
 @end
